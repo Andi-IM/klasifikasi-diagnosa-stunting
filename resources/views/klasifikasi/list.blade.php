@@ -3,7 +3,8 @@
 
 @section('content')
     <div class="col-lg-12 margin-tb">
-        <a href="{{ route('klasifikasi') }}" class="btn btn-primary btn-sm">Hasil Klasifikasi</a><br><br>
+        <a href="{{ route('klasifikasi') }}" class="btn btn-primary btn-sm">Buat Klasifikasi</a>
+        <a href="{{ route('klasifikasi.destroyall') }}" class="btn btn-danger btn-sm">Hapus Semua Data Klasifikasi</a><br><br>
     </div>
     <div class="col-lg-12">
         <div class="card">
@@ -34,44 +35,17 @@
                                     <td>{{ $item->berat_badan }}</td>
                                     <td>{{ $item->tinggi_badan }}</td>
                                     <td>{{ $item->status }}</td>
+                                    <td>{{ date('d F Y H:i A', strtotime($item->updated_at)) }}</td>
                                     <td>
-                                        <a href="{{ route('balita.edit', ['balita_id' => $item->id]) }}"
-                                            class="btn btn-success btn-sm">Edit</a>
-                                        <button onclick="destroy({{ $item->id }})"
-                                            class="btn btn-danger btn-sm">Delete</button>
+                                        <form action="{{ route('klasifikasi.destroy', $item->id) }}" method="post">
+                                            @csrf
+                                            @method('DELETE')
+                                            <a href="{{ route('klasifikasi.edit', $item->id) }}"
+                                                class="btn btn-warning btn-sm">Edit</a>
+                                            <button class="btn btn-danger btn-sm">Delete</button>
+                                        </form>
                                     </td>
                                 </tr>
-                                <script>
-                                    function destroy(id) {
-
-                                        console.log(id);
-
-                                        if (confirm('Anda yakin ingin menghapus data?')) {
-                                            $.ajax({
-                                                type: 'delete',
-                                                url: "{{ route('balita.destroy', ['balita_id' => " . id . "]) }}",
-                                                data: {
-                                                    "_token": "{{ csrf_token() }}",
-                                                    "id": id,
-                                                },
-                                                success: function(response) {
-                                                    $(`tr[databalita-id=${id}]`).remove();
-                                                    window.location?.reload()
-                                                }
-                                            });
-                                        }
-                                    }
-                                </script>
-                                {{-- <tr>
-                                <td>
-                                    <span><a href="javascript:void()" class="mr-4" data-toggle="tooltip"
-                                            data-placement="top" title="Edit"><i
-                                                class="fa fa-pencil color-muted"></i> </a><a
-                                            href="javascript:void()" data-toggle="tooltip"
-                                            data-placement="top" title="Close"><i
-                                                class="fa fa-close color-danger"></i></a></span>
-                                </td>
-                            </tr> --}}
                             @endforeach
                         </tbody>
                     </table>
@@ -79,15 +53,4 @@
             </div>
         </div>
     </div>
-
-    <!-- Favicon icon -->
-    <link rel="icon" type="../assets/image/png" sizes="16x16" href="../assets/images/favicon.png">
-    <!-- Custom Stylesheet -->
-    <link href="../assets/css/style.css" rel="stylesheet">
-
-    <!-- Required vendors -->
-    <script src="./assets/vendor/global/global.min.js"></script>
-    <script src="./assets/js/quixnav-init.js"></script>
-    <script src="./assets/js/custom.min.js"></script>
-
 @endsection

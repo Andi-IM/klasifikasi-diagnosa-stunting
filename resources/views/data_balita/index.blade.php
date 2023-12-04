@@ -48,43 +48,15 @@
                                     <td>{{ $item->tinggi_badan }}</td>
                                     <td>{{ $item->status }}</td>
                                     <td>
-                                        <a href="{{ route('balita.edit', ['balita_id' => $item->id]) }}"
-                                            class="btn btn-success btn-sm">Edit</a>
-                                        <button onclick="destroy({{ $item->id }})"
-                                            class="btn btn-danger btn-sm">Delete</button>
+                                        <form action="{{ route('balita.destroy', $item->id) }}" method="post">
+                                            @csrf
+                                            @method('DELETE')
+                                            <a href="{{ route('balita.edit', $item->id) }}"
+                                                class="btn btn-warning btn-sm">Edit</a>
+                                            <button class="btn btn-danger btn-sm">Delete</button>
+                                        </form>
                                     </td>
                                 </tr>
-                                <script>
-                                    function destroy(id) {
-
-                                        console.log(id);
-
-                                        if (confirm('Anda yakin ingin menghapus data?')) {
-                                            $.ajax({
-                                                type: 'delete',
-                                                url: "{{ route('balita.destroy', ['balita_id' =>" + id + "]) }}",
-                                                data: {
-                                                    "_token": "{{ csrf_token() }}",
-                                                    "id": id,
-                                                },
-                                                success: function(response) {
-                                                    $(`tr[databalita-id=${id}]`).remove();
-                                                    window.location?.reload()
-                                                }
-                                            });
-                                        }
-                                    }
-                                </script>
-                                {{-- <tr>
-                                <td>
-                                    <span><a href="javascript:void()" class="mr-4" data-toggle="tooltip"
-                                            data-placement="top" title="Edit"><i
-                                                class="fa fa-pencil color-muted"></i> </a><a
-                                            href="javascript:void()" data-toggle="tooltip"
-                                            data-placement="top" title="Close"><i
-                                                class="fa fa-close color-danger"></i></a></span>
-                                </td>
-                            </tr> --}}
                             @empty
                             @endforelse
                         </tbody>
