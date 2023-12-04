@@ -26,7 +26,7 @@ class TesterController extends Controller
     {
         $hasil = [];
         $data_testing = $request->total_data - $request->training;
-        $data_latih = DataBalita::limit($data_testing)->get();
+        $data_latih = DataBalita::skip($request->training)->limit($data_testing)->get();
         $naiveBayes = new NaiveBayes();
 
         foreach ($data_latih as $value) {

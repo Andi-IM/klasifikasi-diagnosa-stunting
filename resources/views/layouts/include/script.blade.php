@@ -25,5 +25,4 @@
     <script src="{{ asset('assets/vendor/jqvmap/js/jquery.vmap.usa.js') }}"></script>
     <script src="{{ asset('assets/vendor/jquery.counterup/jquery.counterup.min.js') }}"></script>
 
-
     <script src="{{ asset('assets/js/dashboard/dashboard-1.js') }}"></script>

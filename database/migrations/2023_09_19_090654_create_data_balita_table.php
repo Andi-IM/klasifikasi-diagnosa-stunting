@@ -16,7 +16,7 @@ class CreateDataBalitaTable extends Migration
         Schema::create('data_balita', function (Blueprint $table) {
             $table->id();
             $table->string('nama');
-            $table->string('jk');
+            $table->enum('jk', ['L', 'P']);
             $table->string('umur');
             $table->string('berat_badan');
             $table->string('tinggi_badan');

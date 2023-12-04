@@ -12,4 +12,9 @@ class Klasifikasi extends Model
     protected $fillable = [
         'nama', 'jk', 'umur', 'berat_badan', 'tinggi_badan', 'status'
     ];
+
+    public function getjkAttribute($value)
+    {
+        return $value == 'L' ? 'Laki-Laki' : 'Perempuan';
+    }
 }

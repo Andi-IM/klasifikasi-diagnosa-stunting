@@ -1,7 +1,11 @@
-@extends('layout.app')
+@extends('layouts.app')
 @section('title', 'Data Balita')
 
 @section('content')
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item">Home</li>
+        <li class="breadcrumb-item active">Data Balita</li>
+    </ol>
     <div class="col-lg-12 margin-tb">
         <div class="row-lg-10">
             <a href="{{ route('balita.create') }}" class="btn btn-primary btn-sm">Tambah Data Balita</a>
@@ -55,9 +59,13 @@
                                                 class="btn btn-warning btn-sm">Edit</a>
                                             <button class="btn btn-danger btn-sm">Delete</button>
                                         </form>
+
                                     </td>
                                 </tr>
                             @empty
+                                <tr>
+                                    <td colspan="8" class="text-center">Tidak ada data</td>
+                                </tr>
                             @endforelse
                         </tbody>
                     </table>

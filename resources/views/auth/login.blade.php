@@ -1,4 +1,4 @@
-@extends('layout.login')
+@extends('layouts.auth')
 @section('title', 'Login')
 @section('content')
     <div class="row justify-content-center">
@@ -15,13 +15,13 @@
                         @csrf
                         <h1 class="h3 mb-3 fw-normal">Login</h1>
                         <div class="form-floating">
-                            <input class="form-control mt-2 {{ $errors->has('email') ? ' is-invalid' : '' }}" type="email"
-                                name="email" placeholder="name@example.com" value="{{ old('email') }}" autofocus
-                                required>
-                            <label for="email">Email address</label>
+                            <input placeholder="username"
+                                class="form-control mt-2 {{ $errors->has('name') ? ' is-invalid' : '' }}" type="text"
+                                name="name" value="{{ old('name') }}" autofocus required>
+                            <label for="email">Username</label>
                         </div>
                         <div class="form-floating">
-                            <input class="form-control mt-2 {{ $errors->has('email') ? ' is-invalid' : '' }}"
+                            <input class="form-control mt-2 {{ $errors->has('password') ? ' is-invalid' : '' }}"
                                 type="password" name="password" placeholder="Password" required>
                             <label for="password">Password</label>
                         </div>

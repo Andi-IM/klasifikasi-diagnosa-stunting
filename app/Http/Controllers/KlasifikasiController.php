@@ -32,9 +32,10 @@ class KlasifikasiController extends Controller
             'tinggi_badan' => 'required',
         ]);
 
-        $status = $this->klasifikasi($request->jk, $request->umur, $request->berat_badan, $request->tinggi_badan);
+        $naiveBayes = new NaiveBayes();
+        $status = $naiveBayes->klasifikasi($request->jk, $request->umur, $request->berat_badan, $request->tinggi_badan);
 
-        Klasifikasi::create([
+        $data = Klasifikasi::create([
             'nama' => $request->nama,
             'jk' => $request->jk,
             'umur' => $request->umur,

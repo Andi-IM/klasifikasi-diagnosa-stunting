@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateDataTestingTable extends Migration
+class CreateHasilKlasifikasiTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,15 +13,12 @@ class CreateDataTestingTable extends Migration
      */
     public function up()
     {
-        Schema::create('data_testing', function (Blueprint $table) {
+        Schema::create('hasil_klasifikasi', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('id_data_balita');
+            $table->foreign('id_data_balita')->references('id')->on('data_balita');
+            $table->string('hasil');
             $table->timestamps();
-            $table->string('nama');
-            $table->enum('jk', ['L', 'P']);
-            $table->string('umur');
-            $table->string('berat_badan');
-            $table->string('tinggi_badan');
-            $table->string('status');
         });
     }
 
@@ -32,6 +29,6 @@ class CreateDataTestingTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('data_testing');
+        Schema::dropIfExists('hasil_klasifikasi');
     }
 }
